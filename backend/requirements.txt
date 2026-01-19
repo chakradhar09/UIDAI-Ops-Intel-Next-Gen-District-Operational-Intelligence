@@ -1,0 +1,18 @@
+# FastAPI Backend for UIDAI Ops-Intel Dashboard
+fastapi==0.109.2
+uvicorn[standard]==0.27.1
+pydantic==2.6.1
+python-multipart==0.0.9
+
+# Data Processing (shared with analytics)
+pandas==2.2.0
+numpy==1.26.4
+
+# Time Series
+statsmodels==0.14.1
+
+# CORS
+starlette==0.36.3
+
+# Env management
+python-dotenv==1.0.1

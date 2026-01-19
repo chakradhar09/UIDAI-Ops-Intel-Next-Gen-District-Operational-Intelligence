@@ -1,0 +1,24 @@
+# UIDAI Ops-Intel Dashboard
+# Telangana District Operational Intelligence
+
+# Core Framework
+streamlit>=1.31.0
+
+# Data Processing
+pandas>=2.0.0,<3.0.0
+numpy>=1.24.0,<2.0.0
+
+# Visualization
+plotly>=5.18.0
+
+# Time Series Forecasting
+statsmodels>=0.14.0
+prophet>=1.1.4
+
+# Geospatial
+geopandas>=0.14.0
+shapely>=2.0.0
+
+# Utilities
+python-dateutil>=2.8.0
+requests>=2.31.0

@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   UIDAI Ops-Intel Dashboard - Global Styles
+   ============================================================================ */
+
+:root {
+  --uidai-red: #B72025;
+  --uidai-yellow: #FDB913;
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #1E293B;
+  --border: #E2E8F0;
+  --ring: #B72025;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Selection */
+::selection {
+  background: rgba(183, 32, 37, 0.2);
+  color: var(--uidai-red);
+}
+
+/* ============================================================================
+   COMPONENT STYLES
+   ============================================================================ */
+
+@layer components {
+  /* Glass Card Effect */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-card;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-uidai-red to-uidai-yellow;
+  }
+
+  /* UIDAI Button */
+  .btn-primary {
+    @apply px-6 py-3 bg-uidai-red text-white font-semibold rounded-xl
+           hover:bg-uidai-red-dark transition-all duration-300
+           shadow-lg hover:shadow-glow-red active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-white text-uidai-red font-semibold rounded-xl
+           border-2 border-uidai-red hover:bg-uidai-red hover:text-white
+           transition-all duration-300;
+  }
+
+  /* KPI Card */
+  .kpi-card {
+    @apply relative overflow-hidden rounded-2xl p-6 
+           bg-white shadow-card hover:shadow-card-hover
+           transition-all duration-300 border border-slate-100;
+  }
+
+  .kpi-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-1 bg-uidai-gradient;
+  }
+
+  /* Section Header */
+  .section-header {
+    @apply flex items-center gap-3 mb-6;
+  }
+
+  .section-icon {
+    @apply w-10 h-10 rounded-xl flex items-center justify-center text-white text-lg;
+  }
+
+  .section-icon.red {
+    @apply bg-uidai-red;
+  }
+
+  .section-icon.yellow {
+    @apply bg-uidai-yellow;
+  }
+
+  /* Chart Container */
+  .chart-container {
+    @apply bg-white rounded-2xl p-6 shadow-card border border-slate-100
+           hover:shadow-card-hover transition-all duration-300;
+  }
+
+  /* Alert Badge */
+  .alert-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .alert-badge.critical {
+    @apply bg-red-100 text-red-700;
+  }
+
+  .alert-badge.warning {
+    @apply bg-amber-100 text-amber-700;
+  }
+
+  .alert-badge.info {
+    @apply bg-blue-100 text-blue-700;
+  }
+
+  .alert-badge.success {
+    @apply bg-emerald-100 text-emerald-700;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    @apply fixed left-0 top-0 h-screen w-72 bg-white border-r border-slate-200
+           flex flex-col z-50 transition-transform duration-300;
+  }
+
+  .sidebar-collapsed {
+    @apply -translate-x-full md:translate-x-0 md:w-20;
+  }
+
+  /* Pulse Animation for Alerts */
+  .pulse-alert {
+    @apply relative;
+  }
+
+  .pulse-alert::after {
+    content: '';
+    @apply absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping;
+  }
+
+  /* Skeleton Loading */
+  .skeleton {
+    @apply animate-pulse bg-slate-200 rounded;
+  }
+
+  /* Map Container */
+  .map-container {
+    @apply rounded-2xl overflow-hidden border border-slate-200;
+  }
+}
+
+/* ============================================================================
+   LEAFLET MAP OVERRIDES
+   ============================================================================ */
+
+.leaflet-container {
+  font-family: inherit;
+  border-radius: 1rem;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px;
+}
+
+/* ============================================================================
+   RECHARTS CUSTOMIZATION
+   ============================================================================ */
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #e2e8f0;
+}
+
+.recharts-text {
+  fill: #64748b;
+  font-size: 12px;
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.5s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Staggered Animation */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
