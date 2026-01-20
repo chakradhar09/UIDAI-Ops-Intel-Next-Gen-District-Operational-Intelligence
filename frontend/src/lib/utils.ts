@@ -19,10 +19,16 @@ export function formatNumber(num: number): string {
  * Format number as compact (e.g., 1.2K, 3.4M)
  */
 export function formatCompact(num: number): string {
-  return new Intl.NumberFormat('en-IN', {
-    notation: 'compact',
-    compactDisplay: 'short',
-  }).format(num)
+  if (num >= 1000000000) {
+    return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B'
+  }
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M'
+  }
+  if (num >= 1000) {
+    return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K'
+  }
+  return num.toString()
 }
 
 /**

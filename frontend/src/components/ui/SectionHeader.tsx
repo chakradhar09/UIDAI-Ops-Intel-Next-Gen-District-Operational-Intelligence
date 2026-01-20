@@ -13,10 +13,26 @@ interface SectionHeaderProps {
 }
 
 const variantStyles = {
-  red: 'bg-uidai-red',
-  yellow: 'bg-uidai-yellow',
-  blue: 'bg-blue-500',
-  green: 'bg-emerald-500',
+  red: {
+    bg: 'bg-gradient-to-br from-uidai-navy to-uidai-navy-dark',
+    shadow: 'shadow-uidai-navy/25',
+    text: 'text-uidai-navy',
+  },
+  yellow: {
+    bg: 'bg-gradient-to-br from-uidai-saffron to-uidai-saffron-dark',
+    shadow: 'shadow-uidai-saffron/25',
+    text: 'text-uidai-saffron',
+  },
+  blue: {
+    bg: 'bg-gradient-to-br from-uidai-navy to-uidai-navy-dark',
+    shadow: 'shadow-uidai-navy/25',
+    text: 'text-uidai-navy',
+  },
+  green: {
+    bg: 'bg-gradient-to-br from-uidai-green to-uidai-green-dark',
+    shadow: 'shadow-uidai-green/25',
+    text: 'text-uidai-green',
+  },
 }
 
 export function SectionHeader({
@@ -26,6 +42,8 @@ export function SectionHeader({
   variant = 'red',
   action,
 }: SectionHeaderProps) {
+  const styles = variantStyles[variant]
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -36,17 +54,18 @@ export function SectionHeader({
       <div className="flex items-center gap-4">
         <div
           className={cn(
-            'w-12 h-12 rounded-xl flex items-center justify-center',
+            'w-11 h-11 rounded-xl flex items-center justify-center',
             'text-white shadow-lg',
-            variantStyles[variant]
+            styles.bg,
+            styles.shadow
           )}
         >
-          <Icon className="w-6 h-6" />
+          <Icon className="w-5 h-5" strokeWidth={2.5} />
         </div>
         <div>
-          <h2 className="text-xl font-bold text-slate-900">{title}</h2>
+          <h2 className="text-lg font-bold text-slate-800 tracking-tight">{title}</h2>
           {subtitle && (
-            <p className="text-sm text-slate-500">{subtitle}</p>
+            <p className="text-sm text-slate-500 mt-0.5">{subtitle}</p>
           )}
         </div>
       </div>

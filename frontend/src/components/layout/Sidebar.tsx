@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 import {
   Building2,
   Calendar,
@@ -12,6 +13,7 @@ import {
   AlertTriangle,
   X,
   Menu,
+  Home,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AlertBadge } from '@/components/ui/AlertBadge'
@@ -106,7 +108,7 @@ export function Sidebar({
         initial={false}
         animate={isMobile ? { x: isOpen ? 0 : '-100%' } : { x: 0 }}
         className={cn(
-          'h-screen w-80 bg-white border-r border-slate-200',
+          'h-screen w-80 bg-slate-50/80 backdrop-blur-sm border-r border-slate-200/80',
           'flex flex-col transition-transform duration-300 ease-in-out',
           // Fixed positioning for both mobile and desktop
           'fixed left-0 top-0 z-50',
@@ -115,8 +117,8 @@ export function Sidebar({
         )}
       >
         {/* Header */}
-        <div className="p-6 border-b border-slate-100">
-          <div className="bg-gradient-to-br from-uidai-red to-uidai-red-dark rounded-2xl p-5 text-white shadow-lg">
+        <div className="p-6 border-b border-slate-200/60 bg-white/50">
+          <div className="bg-gradient-to-br from-uidai-navy to-uidai-navy-dark rounded-2xl p-5 text-white shadow-lg">
             <div className="flex items-center gap-3 mb-2">
               <Building2 className="w-8 h-8" />
               <div>
@@ -125,6 +127,11 @@ export function Sidebar({
               </div>
             </div>
           </div>
+          {/* Back to Home Link */}
+          <Link href="/" className="mt-4 flex items-center gap-2 text-sm text-slate-600 hover:text-uidai-saffron transition-colors group">
+            <Home className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Home</span>
+          </Link>
         </div>
 
         {/* Filters */}
@@ -176,7 +183,7 @@ export function Sidebar({
                       onClick={() => toggleDistrict('All')}
                       className={cn(
                         'w-full px-4 py-2 text-left text-sm hover:bg-slate-50',
-                        selectedDistricts.length === 0 && 'bg-uidai-red/5 text-uidai-red font-medium'
+                        selectedDistricts.length === 0 && 'bg-uidai-navy/5 text-uidai-navy font-medium'
                       )}
                     >
                       All Districts
@@ -187,7 +194,7 @@ export function Sidebar({
                         onClick={() => toggleDistrict(district)}
                         className={cn(
                           'w-full px-4 py-2 text-left text-sm hover:bg-slate-50',
-                          selectedDistricts.includes(district) && 'bg-uidai-red/5 text-uidai-red font-medium'
+                          selectedDistricts.includes(district) && 'bg-uidai-navy/5 text-uidai-navy font-medium'
                         )}
                       >
                         {district}
@@ -215,7 +222,7 @@ export function Sidebar({
                   min={dateRange.min}
                   max={dateRange.max}
                   onChange={(e) => onStartDateChange(e.target.value)}
-                  className="w-full border border-slate-200 px-3 py-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uidai-red/20 focus:border-uidai-red"
+                  className="w-full border border-slate-200 px-3 py-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uidai-navy/20 focus:border-uidai-navy"
                 />
               </div>
               <div>
@@ -226,7 +233,7 @@ export function Sidebar({
                   min={dateRange.min}
                   max={dateRange.max}
                   onChange={(e) => onEndDateChange(e.target.value)}
-                  className="w-full border border-slate-200 px-3 py-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uidai-red/20 focus:border-uidai-red"
+                  className="w-full border border-slate-200 px-3 py-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uidai-navy/20 focus:border-uidai-navy"
                 />
               </div>
             </div>
@@ -242,7 +249,7 @@ export function Sidebar({
             <button
               onClick={onRefresh}
               disabled={isLoading}
-              className="w-full flex items-center justify-center gap-2 bg-uidai-red text-white px-4 py-3 rounded-xl font-medium hover:bg-uidai-red-dark transition-colors disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 bg-uidai-navy text-white px-4 py-3 rounded-xl font-medium hover:bg-uidai-navy-dark transition-colors disabled:opacity-50"
             >
               <RefreshCw className={cn('w-4 h-4', isLoading && 'animate-spin')} />
               {isLoading ? 'Loading...' : 'Refresh Data'}
@@ -300,7 +307,7 @@ export function Sidebar({
         </div>
 
         {/* Footer */}
-        <div className="mt-auto p-6 border-t border-slate-200 bg-gradient-to-br from-slate-50 to-white">
+        <div className="mt-auto p-6 border-t border-slate-200/60 bg-white/40">
           <div className="text-center text-xs space-y-1">
             <p className="font-semibold text-slate-700">UIDAI Data Hackathon 2026</p>
             <p className="text-slate-500">Built with ❤️ using Next.js</p>

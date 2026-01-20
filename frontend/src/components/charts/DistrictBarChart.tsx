@@ -35,9 +35,9 @@ export function DistrictBarChart({ data, maxItems = 12 }: DistrictBarChartProps)
               <div className="flex items-center gap-3">
                 <div className={`
                   flex items-center justify-center w-7 h-7 rounded-lg font-bold text-xs
-                  ${idx === 0 ? 'bg-gradient-to-br from-rose-500 to-rose-600 text-white shadow-lg' : 
-                    idx === 1 ? 'bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-lg' :
-                    idx === 2 ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg' :
+                  ${idx === 0 ? 'bg-gradient-to-br from-uidai-saffron to-uidai-saffron-dark text-white shadow-lg' : 
+                    idx === 1 ? 'bg-gradient-to-br from-uidai-navy to-uidai-navy-dark text-white shadow-lg' :
+                    idx === 2 ? 'bg-gradient-to-br from-uidai-green to-uidai-green-dark text-white shadow-lg' :
                     'bg-slate-200 text-slate-600'}
                 `}>
                   #{idx + 1}
@@ -52,10 +52,10 @@ export function DistrictBarChart({ data, maxItems = 12 }: DistrictBarChartProps)
               <div 
                 className={`
                   h-full rounded-full transition-all duration-500 group-hover:shadow-lg
-                  ${idx === 0 ? 'bg-gradient-to-r from-rose-500 to-rose-600' :
-                    idx === 1 ? 'bg-gradient-to-r from-amber-500 to-amber-600' :
-                    idx === 2 ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
-                    'bg-gradient-to-r from-emerald-500 to-emerald-600'}
+                  ${idx === 0 ? 'bg-gradient-to-r from-uidai-saffron to-uidai-saffron-dark' :
+                    idx === 1 ? 'bg-gradient-to-r from-uidai-navy to-uidai-navy-dark' :
+                    idx === 2 ? 'bg-gradient-to-r from-uidai-green to-uidai-green-dark' :
+                    'bg-gradient-to-r from-uidai-navy-light to-uidai-navy'}
                 `}
                 style={{ width: `${percentage}%` }}
               />
@@ -87,7 +87,7 @@ export function DistrictBarChart({ data, maxItems = 12 }: DistrictBarChartProps)
                   </div>
                   <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-gradient-to-r from-slate-400 to-slate-500 rounded-full transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-uidai-navy-light to-uidai-navy rounded-full transition-all duration-500"
                       style={{ width: `${percentage}%` }}
                     />
                   </div>

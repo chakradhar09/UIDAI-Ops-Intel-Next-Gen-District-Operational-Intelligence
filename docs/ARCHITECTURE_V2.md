@@ -16,9 +16,11 @@ The UIDAI Ops-Intel Dashboard is a **Next.js + FastAPI** full-stack application 
 graph TB
     subgraph Frontend["Frontend (Next.js)"]
         UI[React Components]
-        CHARTS[Recharts]
+        TREMOR[Tremor Components]
+        CHARTS[Recharts Engine]
         MAP[React-Leaflet]
         STATE[React State]
+        TREMOR --> CHARTS
     end
     
     subgraph Backend["Backend (FastAPI)"]
@@ -65,7 +67,8 @@ graph TB
 | **Frontend** | Next.js 14 | React framework with SSR/SSG |
 | **Styling** | Tailwind CSS | Utility-first CSS |
 | **Animations** | Framer Motion | Smooth animations |
-| **Charts** | Tremor | Beautiful dashboard components & charts |
+| **Charts (UI)** | Tremor | Dashboard components & wrappers |
+| **Charts (Engine)** | Recharts | Underlying charting library |
 | **Map** | React-Leaflet | Interactive choropleth map |
 | **Backend** | FastAPI | High-performance Python API |
 | **Data Processing** | Pandas, NumPy | Analytics engine |
@@ -203,13 +206,19 @@ sequenceDiagram
 - BadgeDelta for trend indicators
 - Icon backgrounds
 
-### Charts (Tremor)
-- **ForecastChart**: AreaChart with historical + forecast
-- **ProjectionChart**: BarChart (stacked, vertical layout)
-- **DistrictBarChart**: BarChart with rose color
-- **AgeDistributionChart**: DonutChart with Legend
-- **HealthGauge**: ProgressCircle with Badge
-- **MigrationTrendChart**: LineChart for trends
+### Charts (Tremor + Recharts Hybrid)
+Tremor provides pre-styled chart components built on top of Recharts engine:
+- **ForecastChart**: Tremor AreaChart → Recharts AreaChart (historical + forecast)
+- **ProjectionChart**: Tremor BarChart → Recharts BarChart (stacked, vertical)
+- **DistrictBarChart**: Tremor BarChart → Recharts BarChart (rose color)
+- **AgeDistributionChart**: Tremor DonutChart → Recharts PieChart (with Legend)
+- **HealthGauge**: Tremor ProgressCircle (custom component)
+- **MigrationTrendChart**: Tremor AreaChart → Recharts AreaChart (trend lines)
+
+**Architecture Pattern**: 
+```
+React Component → Tremor Component → Recharts Primitive → SVG Rendering
+```
 
 ### Tables (Tremor)
 - Table, TableHead, TableBody, TableRow, TableCell

@@ -46,9 +46,13 @@ export function HealthGauge({ score, title = 'Data Quality Score' }: HealthGauge
         </div>
       </ProgressCircle>
 
-      <Badge color={color} size="lg" className="mt-4">
-        {status}
-      </Badge>
+      <div className={`mt-4 px-4 py-1.5 rounded-full border-2 ${
+        color === 'emerald' ? 'border-uidai-green text-uidai-green bg-green-50' :
+        color === 'amber' ? 'border-uidai-saffron text-uidai-saffron bg-orange-50' :
+        'border-rose-500 text-rose-700 bg-rose-50'
+      }`}>
+        <span className="font-semibold text-sm">{status}</span>
+      </div>
 
       {title && (
         <p className="text-sm font-medium text-slate-600 mt-3">{title}</p>

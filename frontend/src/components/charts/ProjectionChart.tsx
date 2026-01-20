@@ -19,12 +19,13 @@ export function ProjectionChart({ data, maxItems = 10 }: ProjectionChartProps) {
   const valueFormatter = (value: number) => formatCompact(value)
 
   return (
+    <div className="uidai-chart-bar">
     <BarChart
-      className="h-96"
+      className="h-96 [&_.recharts-bar:first-of-type_.recharts-bar-rectangle]:fill-[#F7941D] [&_.recharts-bar:last-of-type_.recharts-bar-rectangle]:fill-[#2E3192]"
       data={chartData}
       index="district"
       categories={['Age 5 Updates', 'Age 15 Updates']}
-      colors={['#B72025', '#3B82F6'] as Color[]}
+      colors={['orange', 'indigo'] as Color[]}
       valueFormatter={valueFormatter}
       showLegend={true}
       showGridLines={true}
@@ -41,12 +42,12 @@ export function ProjectionChart({ data, maxItems = 10 }: ProjectionChartProps) {
             <p className="text-sm font-bold text-slate-800 mb-3">{data?.district}</p>
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-xs font-medium" style={{ color: '#B72025' }}>Age 5 Updates</span>
-                <span className="text-sm font-bold" style={{ color: '#8B181C' }}>{formatCompact(data?.['Age 5 Updates'] || 0)}</span>
+                <span className="text-xs font-medium" style={{ color: '#F7941D' }}>Age 5 Updates</span>
+                <span className="text-sm font-bold" style={{ color: '#D97B0D' }}>{formatCompact(data?.['Age 5 Updates'] || 0)}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-xs font-medium" style={{ color: '#3B82F6' }}>Age 15 Updates</span>
-                <span className="text-sm font-bold" style={{ color: '#2563EB' }}>{formatCompact(data?.['Age 15 Updates'] || 0)}</span>
+                <span className="text-xs font-medium" style={{ color: '#2E3192' }}>Age 15 Updates</span>
+                <span className="text-sm font-bold" style={{ color: '#1E2062' }}>{formatCompact(data?.['Age 15 Updates'] || 0)}</span>
               </div>
               <div className="pt-2 mt-2 border-t border-slate-200 flex justify-between items-center">
                 <span className="text-xs text-slate-600 font-semibold">Total</span>
@@ -57,6 +58,7 @@ export function ProjectionChart({ data, maxItems = 10 }: ProjectionChartProps) {
         )
       }}
     />
+    </div>
   )
 }
 

@@ -7,15 +7,128 @@
    ============================================================================ */
 
 :root {
-  --uidai-red: #B72025;
-  --uidai-yellow: #FDB913;
+  --uidai-navy: #1a4480;
+  --uidai-saffron: #f26522;
+  --uidai-green: #2e7d32;
   --background: #F8FAFC;
   --foreground: #0F172A;
   --card: #FFFFFF;
   --card-foreground: #1E293B;
   --border: #E2E8F0;
-  --ring: #B72025;
+  --ring: #1a4480;
+  
+  /* Tremor chart color overrides */
+  --tremor-brand: #1a4480;
+  --color-orange-500: #f26522;
+  --color-indigo-500: #1a4480;
+  --color-emerald-500: #2e7d32;
 }
+
+/* ============================================================================
+   TREMOR CHART COLOR OVERRIDES - HIGH SPECIFICITY
+   ============================================================================ */
+
+/* Force UIDAI Orange for first series in all charts */
+.uidai-chart-area .recharts-layer.recharts-area:first-of-type path.recharts-area-area,
+.uidai-chart-area svg g.recharts-layer.recharts-area:first-of-type path {
+  fill: #F7941D !important;
+  fill-opacity: 0.4 !important;
+}
+
+.uidai-chart-area .recharts-layer.recharts-area:first-of-type path.recharts-area-curve,
+.uidai-chart-area svg .recharts-area:first-of-type .recharts-curve {
+  stroke: #F7941D !important;
+  stroke-width: 2 !important;
+}
+
+/* Force UIDAI Blue for second series in all charts */
+.uidai-chart-area .recharts-layer.recharts-area:nth-of-type(2) path.recharts-area-area,
+.uidai-chart-area svg g.recharts-layer.recharts-area:nth-of-type(2) path {
+  fill: #2E3192 !important;
+  fill-opacity: 0.4 !important;
+}
+
+.uidai-chart-area .recharts-layer.recharts-area:nth-of-type(2) path.recharts-area-curve,
+.uidai-chart-area svg .recharts-area:nth-of-type(2) .recharts-curve {
+  stroke: #2E3192 !important;
+  stroke-width: 2 !important;
+}
+
+/* ============================================================================
+   FORECAST CHART - DISTINCT HISTORICAL VS FORECAST COLORS
+   ============================================================================ */
+
+/* Forecast chart: Historical = Blue (first series), Forecast = Orange (second) */
+.uidai-chart-forecast .recharts-layer.recharts-area:first-of-type path.recharts-area-area,
+.uidai-chart-forecast svg g.recharts-layer.recharts-area:first-of-type path[fill] {
+  fill: #2E3192 !important;
+  fill-opacity: 0.35 !important;
+}
+
+.uidai-chart-forecast .recharts-layer.recharts-area:first-of-type path.recharts-area-curve,
+.uidai-chart-forecast svg .recharts-area:first-of-type .recharts-curve {
+  stroke: #2E3192 !important;
+  stroke-width: 3 !important;
+}
+
+/* Forecast = Orange with dashed pattern effect */
+.uidai-chart-forecast .recharts-layer.recharts-area:nth-of-type(2) path.recharts-area-area,
+.uidai-chart-forecast svg g.recharts-layer.recharts-area:nth-of-type(2) path[fill] {
+  fill: #F7941D !important;
+  fill-opacity: 0.25 !important;
+}
+
+.uidai-chart-forecast .recharts-layer.recharts-area:nth-of-type(2) path.recharts-area-curve,
+.uidai-chart-forecast svg .recharts-area:nth-of-type(2) .recharts-curve {
+  stroke: #F7941D !important;
+  stroke-width: 3 !important;
+  stroke-dasharray: 8 4 !important;
+}
+
+/* Legend color overrides for forecast chart */
+.uidai-chart-forecast .bg-blue-500,
+.uidai-chart-forecast [class*="bg-blue"] {
+  background-color: #2E3192 !important;
+}
+
+.uidai-chart-forecast .bg-orange-500,
+.uidai-chart-forecast [class*="bg-orange"] {
+  background-color: #F7941D !important;
+}
+
+/* Bar chart color overrides */
+.uidai-chart-bar .recharts-layer.recharts-bar:first-of-type path,
+.uidai-chart-bar .recharts-bar-rectangles:first-of-type path,
+.uidai-chart-bar svg .recharts-bar:first-of-type rect {
+  fill: #F7941D !important;
+}
+
+.uidai-chart-bar .recharts-layer.recharts-bar:nth-of-type(2) path,
+.uidai-chart-bar .recharts-bar-rectangles:nth-of-type(2) path,
+.uidai-chart-bar svg .recharts-bar:nth-of-type(2) rect {
+  fill: #2E3192 !important;
+}
+
+/* Universal recharts fill overrides by class pattern */
+[class*="fill-orange"] { fill: #F7941D !important; }
+[class*="fill-indigo"] { fill: #2E3192 !important; }
+[class*="fill-emerald"] { fill: #10B981 !important; }
+[class*="stroke-orange"] { stroke: #F7941D !important; }
+[class*="stroke-indigo"] { stroke: #2E3192 !important; }
+[class*="stroke-emerald"] { stroke: #10B981 !important; }
+
+/* Tremor specific class overrides */
+.fill-orange-500, .fill-orange-400, .fill-orange-600 { fill: #F7941D !important; }
+.fill-indigo-500, .fill-indigo-400, .fill-indigo-600 { fill: #2E3192 !important; }
+.fill-emerald-500, .fill-emerald-400, .fill-emerald-600 { fill: #10B981 !important; }
+.stroke-orange-500, .stroke-orange-400, .stroke-orange-600 { stroke: #F7941D !important; }
+.stroke-indigo-500, .stroke-indigo-400, .stroke-indigo-600 { stroke: #2E3192 !important; }
+.stroke-emerald-500, .stroke-emerald-400, .stroke-emerald-600 { stroke: #10B981 !important; }
+
+/* Background color overrides for legends */
+.bg-orange-500, .bg-orange-400 { background-color: #F7941D !important; }
+.bg-indigo-500, .bg-indigo-400 { background-color: #2E3192 !important; }
+.bg-emerald-500, .bg-emerald-400 { background-color: #10B981 !important; }
 
 * {
   box-sizing: border-box;
@@ -57,8 +170,61 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(183, 32, 37, 0.2);
-  color: var(--uidai-red);
+  background: rgba(26, 68, 128, 0.2);
+  color: var(--uidai-navy);
+}
+
+/* ============================================================================
+   TREMOR TAB OVERRIDES
+   ============================================================================ */
+
+/* Tab styling */
+[role="tablist"] {
+  border-bottom: none !important;
+}
+
+[role="tab"] {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  background: transparent;
+  border: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  transition: all 0.2s ease;
+}
+
+[role="tab"]:hover {
+  color: #475569;
+  background: #f8fafc;
+}
+
+[role="tab"][aria-selected="true"] {
+  color: #F7941D !important;
+  background: transparent;
+}
+
+[role="tab"][aria-selected="true"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #F7941D, #D97B0D);
+  border-radius: 3px 3px 0 0;
+}
+
+[role="tab"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+[role="tab"]:focus-visible {
+  outline: 2px solid #F7941D;
+  outline-offset: 2px;
+  border-radius: 0.5rem;
 }
 
 /* ============================================================================
@@ -73,19 +239,19 @@ body {
 
   /* Gradient Text */
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-uidai-red to-uidai-yellow;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-uidai-saffron to-uidai-navy;
   }
 
   /* UIDAI Button */
   .btn-primary {
-    @apply px-6 py-3 bg-uidai-red text-white font-semibold rounded-xl
-           hover:bg-uidai-red-dark transition-all duration-300
-           shadow-lg hover:shadow-glow-red active:scale-95;
+    @apply px-6 py-3 bg-uidai-navy text-white font-semibold rounded-xl
+           hover:bg-uidai-navy-dark transition-all duration-300
+           shadow-lg hover:shadow-glow-navy active:scale-95;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-white text-uidai-red font-semibold rounded-xl
-           border-2 border-uidai-red hover:bg-uidai-red hover:text-white
+    @apply px-6 py-3 bg-white text-uidai-navy font-semibold rounded-xl
+           border-2 border-uidai-navy hover:bg-uidai-navy hover:text-white
            transition-all duration-300;
   }
 
@@ -111,11 +277,11 @@ body {
   }
 
   .section-icon.red {
-    @apply bg-uidai-red;
+    @apply bg-uidai-navy;
   }
 
   .section-icon.yellow {
-    @apply bg-uidai-yellow;
+    @apply bg-uidai-saffron;
   }
 
   /* Chart Container */
@@ -209,6 +375,173 @@ body {
 }
 
 /* ============================================================================
+   TREMOR/RECHARTS UIDAI COLOR OVERRIDES
+   ============================================================================ */
+
+/* Area Charts - UIDAI Orange for first series, UIDAI Blue for second */
+.recharts-area-area:nth-of-type(1) {
+  fill: #F7941D !important;
+  fill-opacity: 0.3 !important;
+}
+
+.recharts-area-curve:nth-of-type(1) {
+  stroke: #F7941D !important;
+}
+
+.recharts-area-area:nth-of-type(2) {
+  fill: #2E3192 !important;
+  fill-opacity: 0.3 !important;
+}
+
+.recharts-area-curve:nth-of-type(2) {
+  stroke: #2E3192 !important;
+}
+
+/* Bar Charts - UIDAI Colors */
+.recharts-bar-rectangle:nth-of-type(1) path,
+.recharts-bar:nth-of-type(1) .recharts-bar-rectangle {
+  fill: #F7941D !important;
+}
+
+.recharts-bar-rectangle:nth-of-type(2) path,
+.recharts-bar:nth-of-type(2) .recharts-bar-rectangle {
+  fill: #2E3192 !important;
+}
+
+/* Direct bar fill overrides */
+.recharts-bar-rectangles g:first-child path {
+  fill: #F7941D !important;
+}
+
+.recharts-bar-rectangles g:nth-child(2) path {
+  fill: #2E3192 !important;
+}
+
+/* Stacked bar chart colors */
+[class*="fill-orange"] {
+  fill: #F7941D !important;
+}
+
+[class*="fill-indigo"] {
+  fill: #2E3192 !important;
+}
+
+[class*="fill-emerald"] {
+  fill: #10B981 !important;
+}
+
+/* Legend dots */
+.recharts-legend-item-text {
+  color: #475569 !important;
+}
+
+/* Tremor specific overrides */
+[data-tremor-id] .recharts-layer path {
+  transition: fill 0.2s ease;
+}
+
+/* First color slot - UIDAI Orange */
+.tremor-AreaChart-root svg > g > g:nth-child(1) path[fill],
+.tremor-BarChart-root svg > g > g:nth-child(1) path[fill] {
+  fill: #F7941D !important;
+}
+
+/* Second color slot - UIDAI Blue */
+.tremor-AreaChart-root svg > g > g:nth-child(2) path[fill],
+.tremor-BarChart-root svg > g > g:nth-child(2) path[fill] {
+  fill: #2E3192 !important;
+}
+
+/* Donut/Pie Charts */
+.recharts-pie-sector:nth-of-type(1) path {
+  fill: #F7941D !important;
+}
+
+.recharts-pie-sector:nth-of-type(2) path {
+  fill: #2E3192 !important;
+}
+
+.recharts-pie-sector:nth-of-type(3) path {
+  fill: #10B981 !important;
+}
+
+/* Stroke colors for line/area charts */
+.recharts-line:nth-of-type(1) .recharts-line-curve {
+  stroke: #F7941D !important;
+}
+
+.recharts-line:nth-of-type(2) .recharts-line-curve {
+  stroke: #2E3192 !important;
+}
+
+/* Gradient definitions for area fills */
+.recharts-defs linearGradient:first-of-type stop {
+  stop-color: #F7941D !important;
+}
+
+.recharts-defs linearGradient:nth-of-type(2) stop {
+  stop-color: #2E3192 !important;
+}
+
+/* ============================================================================
+   UIDAI CHART WRAPPER SPECIFIC OVERRIDES
+   ============================================================================ */
+
+/* Donut chart specific */
+.uidai-chart-donut .recharts-pie .recharts-pie-sector:nth-child(1) path {
+  fill: #F7941D !important;
+}
+
+.uidai-chart-donut .recharts-pie .recharts-pie-sector:nth-child(2) path {
+  fill: #2E3192 !important;
+}
+
+.uidai-chart-donut .recharts-pie .recharts-pie-sector:nth-child(3) path {
+  fill: #10B981 !important;
+}
+
+/* Area chart wrappers */
+.uidai-chart-area .recharts-surface .recharts-layer.recharts-area path[fill] {
+  fill-opacity: 0.4 !important;
+}
+
+.uidai-chart-area svg .recharts-area:first-of-type path[fill]:not([fill="none"]) {
+  fill: #F7941D !important;
+}
+
+.uidai-chart-area svg .recharts-area:nth-of-type(2) path[fill]:not([fill="none"]) {
+  fill: #2E3192 !important;
+}
+
+.uidai-chart-area svg .recharts-area:first-of-type path[stroke] {
+  stroke: #F7941D !important;
+}
+
+.uidai-chart-area svg .recharts-area:nth-of-type(2) path[stroke] {
+  stroke: #2E3192 !important;
+}
+
+/* Bar chart wrappers */
+.uidai-chart-bar svg .recharts-bar:first-of-type rect,
+.uidai-chart-bar svg .recharts-bar:first-of-type path {
+  fill: #F7941D !important;
+}
+
+.uidai-chart-bar svg .recharts-bar:nth-of-type(2) rect,
+.uidai-chart-bar svg .recharts-bar:nth-of-type(2) path {
+  fill: #2E3192 !important;
+}
+
+/* SVG path direct targeting by position */
+svg.recharts-surface g.recharts-layer g.recharts-layer:nth-of-type(1) path[fill]:not([fill="none"]):not([fill="url"]) {
+  fill: #F7941D !important;
+}
+
+svg.recharts-surface g.recharts-layer g.recharts-layer:nth-of-type(2) path[fill]:not([fill="none"]):not([fill="url"]) {
+  fill: #2E3192 !important;
+}
+
+/* ============================================================================
    ANIMATIONS
    ============================================================================ */
 
@@ -232,6 +565,51 @@ body {
   }
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes gradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(242, 101, 34, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(242, 101, 34, 0.8), 0 0 60px rgba(26, 68, 128, 0.4);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .animate-slide-in-up {
   animation: slideInUp 0.5s ease-out forwards;
 }
@@ -240,8 +618,122 @@ body {
   animation: fadeIn 0.3s ease-out forwards;
 }
 
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradientFlow 8s ease infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
 /* Staggered Animation */
 .stagger-1 { animation-delay: 0.1s; }
 .stagger-2 { animation-delay: 0.2s; }
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
+
+/* ============================================================================
+   LANDING PAGE SPECIFIC STYLES
+   ============================================================================ */
+
+/* Hero gradient text animation */
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradientFlow 3s linear infinite;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Smooth scrolling for entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but keep functionality */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Gradient border effect */
+.gradient-border {
+  position: relative;
+  background: white;
+  border-radius: 1rem;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #f26522, #1a4480);
+  z-index: -1;
+}
+
+/* Text gradient with animation */
+.text-gradient-animated {
+  background: linear-gradient(90deg, #f26522, #1a4480, #f26522);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 3s linear infinite;
+}
+
+/* Card hover lift effect */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Glowing button effect */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s ease;
+}
+
+.btn-glow:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}

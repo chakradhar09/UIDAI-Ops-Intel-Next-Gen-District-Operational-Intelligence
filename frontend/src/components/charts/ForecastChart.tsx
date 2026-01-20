@@ -27,12 +27,13 @@ export function ForecastChart({ data }: ForecastChartProps) {
   const valueFormatter = (value: number) => formatCompact(value)
 
   return (
+    <div className="uidai-chart-forecast">
     <AreaChart
       className="h-96"
       data={chartData}
       index="date"
       categories={['Historical', 'Forecast']}
-      colors={['#B72025', '#FDB913'] as Color[]}
+      colors={['blue', 'orange'] as Color[]}
       valueFormatter={valueFormatter}
       showLegend={true}
       showGridLines={true}
@@ -46,14 +47,22 @@ export function ForecastChart({ data }: ForecastChartProps) {
         return (
           <div className="rounded-xl border-2 border-white bg-gradient-to-br from-white/95 to-slate-50/95 backdrop-blur-md p-4 shadow-2xl">
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">{data?.date}</p>
-            <p className="text-2xl font-bold bg-gradient-to-r from-uidai-red to-uidai-yellow bg-clip-text text-transparent">
+            <p className={`text-2xl font-bold ${isForecast ? 'text-orange-600' : 'text-blue-600'}`}>
               {formatCompact(data?.Historical || data?.Forecast || 0)}
             </p>
             {isForecast && (
               <div className="flex items-center gap-1.5 mt-2">
-                <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: '#FDB913' }} />
-                <p className="text-xs font-semibold" style={{ color: '#D99E0F' }}>
-                  Predicted Value
+                <div className="w-2 h-2 rounded-full animate-pulse bg-orange-500" />
+                <p className="text-xs font-semibold text-orange-600">
+                  Forecast (Predicted)
+                </p>
+              </div>
+            )}
+            {!isForecast && data?.Historical && (
+              <div className="flex items-center gap-1.5 mt-2">
+                <div className="w-2 h-2 rounded-full bg-blue-500" />
+                <p className="text-xs font-semibold text-blue-600">
+                  Historical Data
                 </p>
               </div>
             )}
@@ -61,6 +70,7 @@ export function ForecastChart({ data }: ForecastChartProps) {
         )
       }}
     />
+    </div>
   )
 }
 

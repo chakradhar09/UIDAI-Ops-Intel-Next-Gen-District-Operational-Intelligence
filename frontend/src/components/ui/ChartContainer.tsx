@@ -1,6 +1,5 @@
 'use client'
 
-import { Card, Title, Subtitle } from '@tremor/react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -28,28 +27,30 @@ export function ChartContainer({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -2 }}
-      className={cn(
-        'relative rounded-2xl',
-        gradient && 'p-[2px] bg-gradient-to-br from-uidai-red/20 via-uidai-yellow/20 to-blue-500/20',
-        className
-      )}
+      className={cn('relative', className)}
     >
-      <Card className={cn(
-        'shadow-card hover:shadow-card-hover transition-all duration-300',
-        gradient && 'bg-white m-0'
+      <div className={cn(
+        'bg-white rounded-2xl border border-slate-200/60 shadow-sm',
+        'hover:shadow-lg hover:border-slate-300/60 transition-all duration-300',
+        gradient && 'ring-1 ring-inset ring-slate-100'
       )}>
         {(title || action) && (
-          <div className="flex items-start justify-between mb-5">
+          <div className="flex items-start justify-between px-6 pt-5 pb-4 border-b border-slate-100">
             <div>
-              {title && <Title className="text-slate-800">{title}</Title>}
-              {subtitle && <Subtitle className="mt-1.5 text-slate-600">{subtitle}</Subtitle>}
+              {title && (
+                <h3 className="text-base font-semibold text-slate-800">{title}</h3>
+              )}
+              {subtitle && (
+                <p className="text-sm text-slate-500 mt-1">{subtitle}</p>
+              )}
             </div>
             {action}
           </div>
         )}
-        {children}
-      </Card>
+        <div className="p-6">
+          {children}
+        </div>
+      </div>
     </motion.div>
   )
 }

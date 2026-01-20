@@ -11,12 +11,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // UIDAI Branding
+        // UIDAI Official Brand Colors
         uidai: {
-          red: '#B72025',
-          'red-dark': '#8B181C',
-          yellow: '#FDB913',
-          'yellow-dark': '#D99E0F',
+          navy: '#1a4480',
+          'navy-dark': '#0d2240',
+          'navy-light': '#2563a8',
+          saffron: '#f26522',
+          'saffron-dark': '#d4541a',
+          'saffron-light': '#ff8a50',
+          green: '#2e7d32',
+          'green-dark': '#1b5e20',
+          'green-light': '#4caf50',
         },
         // Custom palette
         surface: {
@@ -26,10 +31,10 @@ const config: Config = {
           'card-dark': '#1E293B',
         },
         accent: {
-          success: '#10B981',
-          warning: '#F59E0B',
+          success: '#2e7d32',
+          warning: '#f26522',
           danger: '#EF4444',
-          info: '#3B82F6',
+          info: '#1a4480',
         }
       },
       fontFamily: {
@@ -53,19 +58,19 @@ const config: Config = {
           '50%': { transform: 'translateY(-20px)' },
         },
         glow: {
-          '0%': { boxShadow: '0 0 5px rgba(183, 32, 37, 0.5)' },
-          '100%': { boxShadow: '0 0 20px rgba(183, 32, 37, 0.8), 0 0 30px rgba(253, 185, 19, 0.4)' },
+          '0%': { boxShadow: '0 0 5px rgba(242, 101, 34, 0.5)' },
+          '100%': { boxShadow: '0 0 20px rgba(242, 101, 34, 0.8), 0 0 30px rgba(26, 68, 128, 0.4)' },
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'uidai-gradient': 'linear-gradient(135deg, #B72025 0%, #FDB913 100%)',
-        'uidai-gradient-dark': 'linear-gradient(135deg, #8B181C 0%, #D99E0F 100%)',
+        'uidai-gradient': 'linear-gradient(135deg, #f26522 0%, #1a4480 100%)',
+        'uidai-gradient-dark': 'linear-gradient(135deg, #d4541a 0%, #0d2240 100%)',
       },
       boxShadow: {
-        'glow-red': '0 0 20px rgba(183, 32, 37, 0.3)',
-        'glow-yellow': '0 0 20px rgba(253, 185, 19, 0.3)',
+        'glow-saffron': '0 0 20px rgba(242, 101, 34, 0.3)',
+        'glow-navy': '0 0 20px rgba(26, 68, 128, 0.3)',
         'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05)',
         'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05)',
       },

@@ -16,13 +16,19 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: 'UIDAI Ops-Intel Dashboard | District Operational Intelligence',
-  description: 'District Operational Intelligence Dashboard for UIDAI Telangana - Workload Forecasting, Migration Analysis, and Anomaly Detection',
-  keywords: ['UIDAI', 'Aadhaar', 'Dashboard', 'Analytics', 'Telangana', 'Government'],
+  description: 'District Operational Intelligence Dashboard for UIDAI Telangana - Powered by AI-driven Workload Forecasting, Migration Analysis, and Anomaly Detection for smarter government operations.',
+  keywords: ['UIDAI', 'Aadhaar', 'Dashboard', 'Analytics', 'Telangana', 'Government', 'AI', 'Machine Learning', 'Data Hackathon'],
   authors: [{ name: 'UIDAI Data Hackathon 2026' }],
   openGraph: {
-    title: 'UIDAI Ops-Intel Dashboard',
-    description: 'District Operational Intelligence for Telangana',
+    title: 'UIDAI Ops-Intel Dashboard - Transform Operations with AI',
+    description: 'AI-powered District Operational Intelligence for Telangana - Forecasting, Migration Analysis & Anomaly Detection',
     type: 'website',
+    images: ['/og-image.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'UIDAI Ops-Intel Dashboard',
+    description: 'Transform UIDAI operations with AI-driven intelligence',
   },
 }
 
