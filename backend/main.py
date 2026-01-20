@@ -13,6 +13,7 @@ from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
+import os
 
 # Add parent directory to path to import existing modules
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -120,13 +121,21 @@ app = FastAPI(
 )
 
 # CORS Configuration - Allow Next.js frontend
+# In production, set CORS_ORIGINS environment variable
+default_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+cors_origins_env = os.getenv("CORS_ORIGINS", "")
+if cors_origins_env:
+    # Parse comma-separated origins from environment
+    cors_origins = [origin.strip() for origin in cors_origins_env.split(",") if origin.strip()]
+else:
+    cors_origins = default_origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "https://*.vercel.app",  # For production
-    ],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -159,6 +168,28 @@ def get_data():
 async def startup_event():
     """Pre-load data on startup."""
     get_data()
+
+# ============================================================================
+# HEALTH CHECK ENDPOINT
+# ============================================================================
+
+@app.get("/health", tags=["Health"])
+async def health_check():
+    """Health check endpoint for monitoring and deployment verification."""
+    return {
+        "status": "healthy",
+        "service": "UIDAI Ops-Intel API",
+        "version": "1.0.0"
+    }
+
+@app.get("/", tags=["Health"])
+async def root():
+    """Root endpoint with API information."""
+    return {
+        "message": "UIDAI Ops-Intel API",
+        "docs": "/api/docs",
+        "health": "/health"
+    }
 
 # ============================================================================
 # HELPER FUNCTIONS

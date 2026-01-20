@@ -3,7 +3,12 @@
  * Communicates with the FastAPI backend
  */
 
+// In production: NEXT_PUBLIC_API_URL points to deployed backend
+// In local dev: Empty string uses Next.js rewrites to proxy to localhost:8000
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || '';
+
+// Request timeout in milliseconds
+const REQUEST_TIMEOUT = 30000;
 
 // ============================================================================
 // TYPES
@@ -133,6 +138,13 @@ export interface FilterParams {
 // API FUNCTIONS
 // ============================================================================
 
+class APIError extends Error {
+  constructor(public status: number, message: string) {
+    super(message);
+    this.name = 'APIError';
+  }
+}
+
 async function fetchAPI<T>(endpoint: string, params?: Record<string, string>): Promise<T> {
   const url = new URL(`${API_BASE}${endpoint}`, window.location.origin);
   
@@ -142,17 +154,33 @@ async function fetchAPI<T>(endpoint: string, params?: Record<string, string>): P
     });
   }
   
-  const response = await fetch(url.toString(), {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
   
-  if (!response.ok) {
-    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+  try {
+    const response = await fetch(url.toString(), {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      signal: controller.signal,
+    });
+    
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) {
+      throw new APIError(response.status, `API Error: ${response.status} ${response.statusText}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    clearTimeout(timeoutId);
+    
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new APIError(408, 'Request timeout - please try again');
+    }
+    
+    throw error;
   }
-  
-  return response.json();
 }
 
 function buildParams(filters?: FilterParams): Record<string, string> {
