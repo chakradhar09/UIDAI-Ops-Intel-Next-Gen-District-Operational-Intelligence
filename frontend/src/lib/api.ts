@@ -146,7 +146,18 @@ class APIError extends Error {
 }
 
 async function fetchAPI<T>(endpoint: string, params?: Record<string, string>): Promise<T> {
-  const url = new URL(`${API_BASE}${endpoint}`, window.location.origin);
+  // Build the full URL
+  // If API_BASE is a full URL (production), use it directly
+  // If API_BASE is empty (local dev), use relative path with window.location.origin
+  let url: URL;
+  
+  if (API_BASE && API_BASE.startsWith('http')) {
+    // Production: API_BASE is a full URL like https://backend.railway.app
+    url = new URL(endpoint, API_BASE);
+  } else {
+    // Local dev: use relative path
+    url = new URL(`${API_BASE}${endpoint}`, window.location.origin);
+  }
   
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
