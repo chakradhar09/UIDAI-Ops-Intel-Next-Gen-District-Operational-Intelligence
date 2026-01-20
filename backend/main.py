@@ -164,8 +164,11 @@ def get_data():
 
 @app.on_event("startup")
 async def startup_event():
-    """Pre-load data on startup."""
-    get_data()
+    """Pre-load data on startup - but do it in background to avoid blocking."""
+    import asyncio
+    # Load data in background so Railway health checks don't timeout
+    asyncio.create_task(asyncio.to_thread(get_data))
+    print("🚀 Starting background data load...")
 
 # ============================================================================
 # HEALTH CHECK ENDPOINT
