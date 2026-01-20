@@ -15,9 +15,7 @@ from pydantic import BaseModel
 import pandas as pd
 import os
 
-# Add parent directory to path to import existing modules
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
+# src/ is now inside backend/, so we can import directly
 from src.data_loader import (
     load_enrolment_data,
     load_biometric_update_data,

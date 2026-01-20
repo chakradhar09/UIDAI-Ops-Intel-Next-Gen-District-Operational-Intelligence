@@ -6,7 +6,8 @@ from pathlib import Path
 # ============================================================================
 # PATHS
 # ============================================================================
-BASE_DIR = Path(__file__).parent.parent
+# src/, Datasets/, and assets/ are all inside backend/
+BASE_DIR = Path(__file__).parent.parent  # backend/src -> backend
 DATASETS_DIR = BASE_DIR / "Datasets"
 ASSETS_DIR = BASE_DIR / "assets"
 
